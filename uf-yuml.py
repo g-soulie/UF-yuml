@@ -71,6 +71,7 @@ def ajouter_laisons(string_yuml):#Ajoute les liaisons a la string yuml
         f=open("./"+folder+liaisons[i],'r')
         for line in f:
             line = line.split(",")
+            line[2]=line[2].rstrip('\n')
             string_yuml+='['+line[0]+']'+line[1]+'['+line[2]+'],'
     string_yuml=string_yuml.rstrip(',')
     return string_yuml
