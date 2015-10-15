@@ -1,0 +1,1 @@
+echo "[nom1|attribut 1.1;attribut 1.2|methode 1.1;methode 1.2],[nom2|attribut 2.1;attribut 2.2|methode 2.1;methode 2.2],[nom1]->[nom2]"| ./yuml -s plain -f pdf -o exemple/uml.pdf -v
