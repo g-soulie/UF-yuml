@@ -3,11 +3,18 @@ import commands
 import sys
 import javagen
 
-folder=str(sys.argv[1]) #dossier du projet
-methods=("methods" == str(sys.argv[2])) #si l'on veut afficher ou non les méthodes
-output_format=str(sys.argv[3])
-output_shape=str(sys.argv[4])
+#python uf_yuml.py exemple/ methoffds png plain
 
+
+params={"-p":"","-f":"png","-s":"plain","-j":"False","-g":"False","-m":"False"}
+i=1
+while i <len(sys.argv):
+    if sys.argv[i] in params:
+        params[sys.argv[i]]=sys.argv[i+1]
+        i+=1
+    i+=1
+
+folder = params["-p"]
 
 def fichier_to_JSON(i,classes):#transforme un fichier de classe en un JSON ad hoc
     #format du JSON : {"name":"","attributs":[],"methods":[]} 
@@ -16,7 +23,7 @@ def fichier_to_JSON(i,classes):#transforme un fichier de classe en un JSON ad ho
     etat=-1
     for line in f:
         if etat == -1:
-            json["name"]=line.rstrip('\n')
+            json["name"]=line.rstrip('\n')  
             etat += 1
         elif len(line)==1:
             etat += 1
@@ -76,6 +83,12 @@ def ajouter_laisons(string_yuml):#Ajoute les liaisons a la string yuml
     for i in range(len(liaisons)):
         f=open("./"+folder+liaisons[i],'r')
         for line in f:
+            i=0
+            while i < (len(line))-1:
+                if line[i:i+2]=='<<' or line[i:i+2]=='>>':
+                    line = line[:i]+'\\'+line[i+1]+'\\'+line[i+1:]
+                    i+=3
+                i+=1    
             line = line.split(",")
             line[2]=line[2].rstrip('\n')
             string_yuml+='['+line[0]+']'+line[1]+'['+line[2]+'],'
@@ -116,9 +129,10 @@ def ecriture_classe():#ecris les classes de la stringyuml
     jsons=[]
     for i in range(len(classes)):
         jsons.append(fichier_to_JSON(i,classes))
-    pass
+    print params["-g"]
+    if (params["-j"]=="True"):
+        javagen.gen(folder,jsons,"True"==params["-g"])
 
-    javagen.gen(folder,jsons,True)
     return string_yuml
 
 
@@ -126,14 +140,14 @@ def ecriture_classe():#ecris les classes de la stringyuml
 
 string_output = ecriture_classe()
 #-------------------On enleve les methods si besoin---------------
-if not methods:
+if "False"==(params["-m"]):
     string_output = retirer_methods(string_output)
 
 #---------------------On rajoute les liaisons---------------------
 string_output = ajouter_laisons(string_output)
 
 #-----On termine, on exporte pour le souvenir et en execute yuml ---
-string_output += "\"| ./yuml -s "+output_shape+" -f "+output_format+" -o "+folder+"uml."+output_format+" -v"
+string_output += "\"| ./yuml -s "+params["-s"]+" -f "+params["-f"]+" -o "+folder+"uml."+params["-f"]+" -v"
 
 
 commands.getoutput("rm ./"+folder+"string_yuml.txt")
