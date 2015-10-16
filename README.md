@@ -8,7 +8,10 @@ The UF-yUML project allows you to draw very easyly UML diagramm, and generate th
 
 <b>Installation</b>
 
-This project is based on yuml 0.1 (https://pypi.python.org/pypi/yuml). In order to use UF-yUML, you will need to install yuml 0.1 (github repository : https://github.com/wandernauta/yuml/).
+This project is based on yuml 0.1 (https://pypi.python.org/pypi/yuml). In order to use UF-yUML, you will need to install yuml 0.1 (github repository : https://github.com/wandernauta/yuml/) : 
+
+               sudo pip install https://github.com/wandernauta/yuml/zipball/master
+
 Once you've install yuml 0.1, you only need to clone the UF-yUML repository in the same folder.
 
 
