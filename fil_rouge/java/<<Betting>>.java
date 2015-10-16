@@ -1,4 +1,4 @@
-public class <<Betting>> {
+public interface Betting {
 	
 	void  addCompetition(java.lang.String competition, java.util.Calendar closingDate, java.util.Collection<Competitor> competitors, java.lang.String managerPwd) :void{
 	}

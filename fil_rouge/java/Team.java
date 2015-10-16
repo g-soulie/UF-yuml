@@ -1,19 +1,35 @@
-public class Team implements <<Competitor>> {
-	private String  name
-	private <SingleCompetitor>  members 
+public class Team implements Competitor {
+	private String name
+	private <SingleCompetitor> members 
 	
-	public  Team(String name): void{
+	public Team(String name){
 	}
 
-	public  add_member(SingleCompetitor member): void{
+	public void add_member(SingleCompetitor member){
 	}
 
-	public  addMember(Competitor member): void{
+	public void addMember(Competitor member){
 	}
 
-	public  deleteMember(Competitor member): void{
+	public void deleteMember(Competitor member){
 	}
 
-	public  hasValidname(): boolean{
+	public boolean hasValidname(){
+	}
+
+	public  String get_name(){
+		return name;
+	}
+
+	public  String set_name(String name){
+		this.name=name;
+	}
+
+	public  <SingleCompetitor> get_members(){
+		return members;
+	}
+
+	public  <SingleCompetitor> set_members(<SingleCompetitor> members){
+		this.members=members;
 	}
 }

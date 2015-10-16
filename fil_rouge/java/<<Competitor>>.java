@@ -1,11 +1,11 @@
-public class <<Competitor>> {
+public interface Competitor {
 	
-	public  addMember(Competitor member): void{
+	public void addMember(Competitor member){
 	}
 
-	public  deleteMember(Competitor member): void{
+	public void deleteMember(Competitor member){
 	}
 
-	public  hasValidname(): boolean{
+	public boolean hasValidname(){
 	}
 }

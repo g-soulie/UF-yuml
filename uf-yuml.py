@@ -12,7 +12,7 @@ output_shape=str(sys.argv[4])
 def fichier_to_JSON(i,classes):#transforme un fichier de classe en un JSON ad hoc
     #format du JSON : {"name":"","attributs":[],"methods":[]} 
     f=open("./"+folder+"class/"+classes[i],'r')
-    json={"name":"","attributs":[],"methods":[]}
+    json={"name":"","attributs":[],"methods":[],"asc":""}
     etat=-1
     for line in f:
         if etat == -1:
@@ -118,7 +118,7 @@ def ecriture_classe():#ecris les classes de la stringyuml
         jsons.append(fichier_to_JSON(i,classes))
     pass
 
-    javagen.gen(folder,jsons)
+    javagen.gen(folder,jsons,True)
     return string_yuml
 
 
