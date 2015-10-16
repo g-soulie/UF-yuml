@@ -1,1 +1,1 @@
-echo "[nom1|+boris: personne;-linux: OS|+methode 1.1;methode 1.2;+expliquer_Stephane(Guillaume gu)],[nom2|attribut 2.1;attribut 2.2|methode 2.1;methode 2.2],[nom1]->[nom2]"| ./yuml -s plain -f pdf -o exemple/uml.pdf -v
+echo "[Classe name2|+ Attribut1: c;- Attribut2: d]"| ./yuml -s plain -f svg -o exemple/uml.svg -v

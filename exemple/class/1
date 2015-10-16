@@ -1,9 +1,7 @@
-nom1
+Classe name2
 
-+boris: personne
--linux: OS
++ Attribut1: c
+- Attribut2: d
 
-+methode 1.1
-methode 1.2
-+expliquer_Stephane(Guillaume gu)
-
++ Method1(): a
+- Method2(): b
