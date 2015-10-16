@@ -87,7 +87,6 @@ def genClassJava(folder,json):
 				json['methods'][i]="private"+ str(a[1]) +""+str(a[0])
 			else:
 				json['methods'][i]="private"+ str(a)
-		print(str(json['methods'][i]))
 		f.write(str(json['methods'][i])+"\n\t}\n")
 
 			
@@ -145,21 +144,26 @@ def set_get(jsons):
 	for json in jsons:
 		new_json=json
 		for i in range(len(json['attributs'])):
-			a=json['attributs'][i]
-			a=a.split(':')
-			if (len(a)>1):
-				string = "+ get_"+a[0].lstrip('-').lstrip('+').lstrip(' ').rstrip(' ')+"(): "+a[1]
-				new_json['methods'].append(string)
-				string = "+ set_"+a[0].lstrip('-').lstrip('+').lstrip(' ').rstrip(' ')+"("+a[1].lstrip(' ')
-				string+=" "+a[0].lstrip('-').lstrip('+').lstrip(' ').rstrip(' ')+"): "+a[1]
-				new_json['methods'].append(string)
-				new_jsons.append(new_json)
+			if json['attributs'][i][0]=='+':
+				a=json['attributs'][i]
+				a=a.split(':')
+				if (len(a)>1):
+					string = "+ get_"+a[0].lstrip('-').lstrip('+').lstrip(' ').rstrip(' ')+"(): "+a[1]
+					new_json['methods'].append(string)
+					string = "+ set_"+a[0].lstrip('-').lstrip('+').lstrip(' ').rstrip(' ')+"("+a[1].lstrip(' ')
+					string+=" "+a[0].lstrip('-').lstrip('+').lstrip(' ').rstrip(' ')+"): "+a[1]
+					new_json['methods'].append(string)
+					new_jsons.append(new_json)
 	return new_jsons
 	
 
 def gen(folder,jsons,getter):
+	commands.getoutput("rm ./"+folder+"/java/*")
 	new_jsons = setupLiaisons(folder,jsons)
+	print new_jsons
+	print getter
 	if getter:
 		new_jsons=set_get(new_jsons)
+	print new_jsons
 	for json in new_jsons:
 		genClassJava(folder,json)
