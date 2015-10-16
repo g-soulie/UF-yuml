@@ -1,0 +1,10 @@
+Competition
+
+- name: String
+- closingDate: Calendar
+- competitors: <Competitors>
+- bettings: <Betting>
+- podium: <Competitor>
+- winner Competitor
+
++ Competition(String name, Calendar closingDate): void

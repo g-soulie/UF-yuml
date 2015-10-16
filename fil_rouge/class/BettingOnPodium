@@ -1,0 +1,8 @@
+bettingOnPodium
+
+- first_winner: Competitor
+- second_winner: Competitor
+- third_winner: Competitor
+
++ BettingOnPodium(Competitor first_winner, Competitor second_winner ,Competitor third_winner): void
++ prediction(Competitor first_winner, Competitor second_winner ,Competitor third_winner): boolean

@@ -1,0 +1,7 @@
+Team
+
+- name: String
+- members : <SingleCompetitor>
+
++ Team(String name): void
++ add_member(SingleCompetitor member): void

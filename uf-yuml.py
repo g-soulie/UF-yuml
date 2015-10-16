@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import commands
 import sys
+import javagen
 
 folder=str(sys.argv[1]) #dossier du projet
 methods=("methods" == str(sys.argv[2])) #si l'on veut afficher ou non les méthodes
@@ -49,7 +50,9 @@ def JSON_to_string(json):#transforme un JSON en une string yuml ad hoc
             i += 6
         i += 1
     return stri
-def ajouter_laisons(string_yuml):#Ajoute les liaisons a la string yuml
+
+
+def get_liaisons(folder):
     #recuperation des fichiers de liaisons = ceux commencant par liaisons
     commands.getoutput("rm ./"+folder+".liaisons.txt")
     commands.getoutput("ls ./"+folder +">> ./"+folder+".liaisons.txt")
@@ -62,8 +65,11 @@ def ajouter_laisons(string_yuml):#Ajoute les liaisons a la string yuml
     for fichier in fichiers:
         if fichier[0:7]=="liaison":
             liaisons.append(fichier)
+    return liaisons
 
 
+def ajouter_laisons(string_yuml):#Ajoute les liaisons a la string yuml
+    liaisons = get_liaisons(folder)
 
     string_yuml+=","
     #Ajout liaisons:
@@ -106,6 +112,13 @@ def ecriture_classe():#ecris les classes de la stringyuml
     for i in range(len(classes)-1):
         string_yuml+=JSON_to_string(fichier_to_JSON(i,classes))+','
     string_yuml+=JSON_to_string(fichier_to_JSON(len(classes)-1,classes))
+    #Generation java :
+    jsons=[]
+    for i in range(len(classes)):
+        jsons.append(fichier_to_JSON(i,classes))
+    pass
+
+    javagen.gen(folder,jsons)
     return string_yuml
 
 
@@ -126,6 +139,8 @@ string_output += "\"| ./yuml -s "+output_shape+" -f "+output_format+" -o "+folde
 commands.getoutput("rm ./"+folder+"string_yuml.txt")
 f = open("./"+folder+"string_yuml.txt","w")
 f.write(string_output)
+
+
 
 print("seems good :-)")
 
