@@ -16,6 +16,9 @@ Once you've install yuml 0.1, you only need to clone the UF-yUML repository in t
 
 Please read the User Manual to learn how to use UF-yUML (./UserManual.pdf).
 
+The typical run command is :
+     python uf_yuml.py -p exemple/ -f pdf -m True -j True -g True
+
 
 <b> Acknowledgement </b>
 
