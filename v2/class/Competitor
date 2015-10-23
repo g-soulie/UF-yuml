@@ -1,0 +1,7 @@
+<<Interface>> Competitor
+
+     
+
++ addMember(Competitor member): void
++ deleteMember(Competitor member): void
++ hasValidname(): boolean

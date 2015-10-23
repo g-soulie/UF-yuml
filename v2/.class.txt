@@ -1,0 +1,12 @@
+authentificate
+Betting
+Betting_interface
+BettingOnPodium
+BettingOnWinner
+Competition
+Competitor
+CurrentLists
+Gestion
+SingleCompetitor
+Subscriber
+Team

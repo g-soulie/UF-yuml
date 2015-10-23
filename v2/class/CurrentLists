@@ -1,0 +1,13 @@
+CurrentLists
+
+- team: <team>
+- singleCompetitors: <Single_Competitor>
+- subscribers: <Subscribers>
+- currentCompetitions: <Competition>
+- pastCompetitions: <Competition>
+
++ createSingleCompetitor(java.lang.String lastName,java.lang.String firstName,java.lang.String borndate): Competitor
++ createTeam(java.lang.String name): Competitor
++ createCompetition(java.lang.String competition,java.util.Calendar closingDate,java.util.Collection<Competitor> competitors): Competition
++ createSubscriber(java.lang.String lastName,java.lang.String firstName,java.lang.String username,java.lang.String borndate): Subscriber
+
