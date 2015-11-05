@@ -2,5 +2,5 @@ Authentificate
 
   
 
-+ authentificate_subscriber(String username, String Password)
-+ authentificate_manager(String Password)
++ authentificateSubscriber(String username, String password)
++ authentificateManager(String password)
