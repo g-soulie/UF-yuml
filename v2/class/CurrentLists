@@ -1,7 +1,7 @@
 CurrentLists
 
 - team: <team>
-- singleCompetitors: <Single_Competitor>
+- singleCompetitors: <SingleCompetitor>
 - subscribers: <Subscribers>
 - currentCompetitions: <Competition>
 - pastCompetitions: <Competition>
