@@ -9,5 +9,5 @@ Subscriber
 - bettings: <Betting>
 
 + Subscriber(String lastName, String firstName, String username, String borndate): void
-+ add_bettingOnWinner(Competition competition, Competitor winner): void
-+ add_bettingOnPodium(Competition competition, Competitor first_winner, Competitor second_winner ,Competitor third_winner): void
++ addBettingOnWinner(Competition competition, Competitor winner): void
++ addBettingOnPodium(Competition competition, Competitor firstWinner, Competitor secondWinner ,Competitor thirdWinner): void
