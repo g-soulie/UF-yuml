@@ -4,4 +4,4 @@ Team
 - members : <SingleCompetitor>
 
 + Team(String name): void
-+ add_member(SingleCompetitor member): void
++ addMember(SingleCompetitor member): void
