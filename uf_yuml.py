@@ -32,6 +32,7 @@ def fichier_to_JSON(i,classes):#transforme un fichier de classe en un JSON ad ho
         elif etat == 2:
             json["methods"].append(line.rstrip('\n'))
     return json
+
 def JSON_to_string(json):#transforme un JSON en une string yuml ad hoc
     stri = ""
     stri += '[' + json["name"]
@@ -111,6 +112,7 @@ def retirer_methods(string_yuml):#Retire les methods d'une string yuml
                     new_string += string_yuml[i]
     string_yuml=new_string
     return string_yuml
+
 def ecriture_classe():#ecris les classes de la stringyuml
     #réupération du nombre de classes, dans le dossier ./folder/class/
     commands.getoutput("rm ./"+folder+".class.txt")
@@ -125,11 +127,11 @@ def ecriture_classe():#ecris les classes de la stringyuml
     for i in range(len(classes)-1):
         string_yuml+=JSON_to_string(fichier_to_JSON(i,classes))+','
     string_yuml+=JSON_to_string(fichier_to_JSON(len(classes)-1,classes))
+
     #Generation java :
     jsons=[]
     for i in range(len(classes)):
         jsons.append(fichier_to_JSON(i,classes))
-    print params["-g"]
     if (params["-j"]=="True"):
         javagen.gen(folder,jsons,"True"==params["-g"])
 
@@ -137,8 +139,8 @@ def ecriture_classe():#ecris les classes de la stringyuml
 
 
 #-----------On ecris les classes (ac attributs et methodes--------
-
 string_output = ecriture_classe()
+
 #-------------------On enleve les methods si besoin---------------
 if "False"==(params["-m"]):
     string_output = retirer_methods(string_output)

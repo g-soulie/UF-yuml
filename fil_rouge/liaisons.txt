@@ -1,20 +1,20 @@
 Betting,*<->1,Subscriber
 Betting,^-,BettingOnWinner
 Betting,^-,BettingOnPodium
-SingleCompetitor,-.-^,<<Competitor>>
-Team,-.-^,<<Competitor>>
+SingleCompetitor,-.-^,<<Interface>> Competitor
+Team,-.-^,<<Interface>> Competitor
 Competition,1<->*,Betting
-BettingOnPodium,->3,<<Competitor>>
-BettingOnWinner,->1,<<Competitor>>
+BettingOnPodium,->3,<<Interface>> Competitor
+BettingOnWinner,->1,<<Interface>> Competitor
 authentificate,->1,CurrentLists
-Competition,->*,<<Competitor>>
+Competition,->*,<<Interface>> Competitor
 CurrentLists,->*,Competition
 CurrentLists,->*,Subscriber
 CurrentLists,->*,Team
 CurrentLists,->*,SingleCompetitor
 Team,<>*-*,SingleCompetitor
 Gestion,->1,CurrentLists
-Gestion,-.-^,<<Betting>>
+Gestion,-.-^,<<Interface>> Betting
 Gestion,->1,authentificate
 Subscriber,->*,BettingOnPodium
 Subscriber,->*,BettingOnWinner

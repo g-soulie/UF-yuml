@@ -1,4 +1,11 @@
+# -*- coding: utf-8 -*-
 import commands
+from Classe import *
+from Interface import *
+
+
+classes = {}
+interfaces = {}
 
 def get_liaisons(folder):
     #recuperation des fichiers de liaisons = ceux commencant par liaisons
@@ -15,155 +22,57 @@ def get_liaisons(folder):
             liaisons.append(fichier)
     return liaisons
 
-def genClassJava(folder,json):
-	if json['name'][0:2]=='<<':
-		typ = "interface"
-		name = json['name'].lstrip('<<').rstrip('>>')
-	else:
-		typ="class"
-		name = json['name']
 
-	String = "public "+typ+" "+name+json["asc"]+" {\n"
-	commands.getoutput("rm ./"+folder+"java/"+json["name"]+".java")
-	commands.getoutput("mkdir ./"+folder+"/java/")
-	f=open("./"+folder+"java/"+json["name"]+".java",'w')
-	f.write(String+"\t")
-
-	for i in range(len(json['attributs'])):
-		if json['attributs'][i][0]=='+':
-			a=json['attributs'][i][1:]
-			a=a.split(':')
-			if len(a)>1:
-				json['attributs'][i]="public"+ str(a[1]) +""+str(a[0])
-			else:
-				json['attributs'][i]="public "+ str(a)
-		if json['attributs'][i][0]=='-':
-			a=json['attributs'][i][1:]
-			a=a.split(':')
-			if len(a)>1:
-				json['attributs'][i]="private"+ str(a[1]) +""+str(a[0])
-			else:
-				json['attributs'][i]="private"+ str(a)
-		f.write(json['attributs'][i]+"\n\t")
-	
-	f.write('')
-	for i in range(len(json['methods'])):
-		f.write('\n\t')
-		c=""
-		if json['methods'][i][0]=='+':
-			a=json['methods'][i][1:]
-			a=a.split(':')
-			if len(a)>1:
-				b = a[0].lstrip(' ').split('(')
-				if b[0]==json['name']:
-					json['methods'][i]="public"+ str(a[0])
-				else:
-					json['methods'][i]="public"+ str(a[1]) +""+str(a[0])
-				getSet = a[0].lstrip('-').lstrip('+').lstrip(' ')
-				json['methods'][i]+='{'
-				if 'get_' in getSet:
-					tt=a[0].split('(')[0].split('_')
-					t=""
-					for k in range(len(tt)-2):
-						t=t+tt[k+1]+"_"
-					t+=tt[len(tt)-1]
-					c+="\n\t\treturn "+t+";"
-				elif 'set_' in getSet:
-					tt=a[0].split('(')[0].split('_')
-					t=""
-					for k in range(len(tt)-2):
-						t+=tt[k+1]+"_"
-					t+=tt[len(tt)-1]
-					c="\n\t\tthis."+t
-					c+="="+t+";"
-				json['methods'][i]+=c
-
-			else:
-				json['methods'][i]="public "+ str(a)
-		if json['methods'][i][0]=='-':
-			a=json['methods'][i][1:]
-			a=a.split(':')
-			if len(a)>1:
-				json['methods'][i]="private"+ str(a[1]) +""+str(a[0])
-			else:
-				json['methods'][i]="private"+ str(a)
-		f.write(str(json['methods'][i])+"\n\t}\n")
-
-			
-	f.write("}")
-
-def set_implements(jsons,classe,interface):
-	interface_methods=[]
-	new_jsons = jsons
-	for i in range(len(new_jsons)):
-		if new_jsons[i]['name']==interface:
-			for method in new_jsons[i]['methods']:
-				interface_methods.append(method)
-	for i in range(len(new_jsons)):
-		if new_jsons[i]["name"]==classe:
-			new_jsons[i]["asc"]=" implements "+interface.rstrip('>>').lstrip('<<')
-			for method in interface_methods:
-				new_jsons[i]['methods'].append(method)
-	return new_jsons
-
-def set_extends(jsons,fille,mere):
-	new_jsons = jsons
-	mere_attributs=[]
-	for i in range(len(new_jsons)):
-		if new_jsons[i]['name']==mere:
-			for method in new_jsons[i]['attributs']:
-				mere_attributs.append(method)
-	for i in range(len(new_jsons)):
-		if new_jsons[i]["name"]==fille:
-			new_jsons[i]["asc"] =" extends "+mere
-			for attributs in mere_attributs:
-				new_jsons[i]['attributs'].append(attributs)
-	return new_jsons
-
-
-
-def setupLiaisons(folder,jsons):
+def setupLiaisons(folder):
     liaisons = get_liaisons(folder)
-    new_jsons=jsons
     for i in range(len(liaisons)):
         f=open("./"+folder+liaisons[i],'r')
         for line in f:
-        	line = line.split(',')
+        	line = line.rstrip('\n').split(',')
         	if '^-.-' in line[1]:
-        		new_jsons=set_implements(new_jsons,line[2].rstrip('\n'),line[0])
+        		real_name = line[0].split(">>")[1].lstrip(" ").lstrip("\n")
+        		classes[line[2]].addInterface(interfaces[real_name])
     		elif '-.-^' in line[1]:
-        		new_jsons=set_implements(new_jsons,line[0],line[2].rstrip('\n'))
+        		real_name = line[2].split(">>")[1].lstrip(" ").lstrip("\n")
+        		classes[line[0]].addInterface(interfaces[real_name])
         	elif '^-' in line[1]:
-        		new_jsons=set_extends(new_jsons,line[2].rstrip('\n'),line[0])
+        		classes[line[2]].addClasseMere(classes[line[0]])
         	elif '-^' in line[1]:
-        		new_jsons=set_extends(new_jsons,line[2].rstrip('\n'),line[0])
-    return new_jsons
+ 				classes[line[0]].addClasseMere(classes[line[2]])
 
-def set_get(jsons):
-	new_jsons=[]
-	for json in jsons:
-		new_json=json
-		for i in range(len(json['attributs'])):
-			if json['attributs'][i][0]=='+':
-				a=json['attributs'][i]
-				a=a.split(':')
-				if (len(a)>1):
-					string = "+ get_"+a[0].lstrip('-').lstrip('+').lstrip(' ').rstrip(' ')+"(): "+a[1]
-					new_json['methods'].append(string)
-					string = "+ set_"+a[0].lstrip('-').lstrip('+').lstrip(' ').rstrip(' ')+"("+a[1].lstrip(' ')
-					string+=" "+a[0].lstrip('-').lstrip('+').lstrip(' ').rstrip(' ')+"): "+a[1]
-					new_json['methods'].append(string)
-					new_jsons.append(new_json)
-	return new_jsons
 	
+def createClasse(json):
+	classe = Classe(json["name"])
+	classe.fromUML(json)
+	classes[json["name"]] = classe
+
+def createInterface(json):
+	real_name = json["name"].split(">>")[1].lstrip(" ").lstrip("\n")
+	interface = Interface(real_name)
+	interface.fromUML(json)
+	interfaces[real_name] = interface
+
+def write(javaObject,folder):
+	f = open("./"+folder+"java/"+javaObject.name+".java",'w')
+	f.write(javaObject.toString())
+	f.close()
+
 
 def gen(folder,jsons,getter):
 	commands.getoutput("rm ./"+folder+"/java/*")
-	new_jsons = setupLiaisons(folder,jsons)
-	print new_jsons
-	print getter
-	if getter:
-		new_jsons=set_get(new_jsons)
-	print new_jsons
-	for json in new_jsons:
-		genClassJava(folder,json)
+
+	#Création des classes et des interfaces:
+	for json in jsons:
+		if json["name"][0] == "<":
+			createInterface(json)
+		else:
+			createClasse(json)
+
+	#Générations des liaisons:
+	setupLiaisons(folder)
+
+	#Ecriture des fichiers générés
+	for classe in classes:
+		write(classes[classe],folder)
+	for interface in interfaces:
+		write(interfaces[interface],folder)

@@ -1,5 +1,4 @@
 public interface Competitor {
-	
 	public void addMember(Competitor member){
 	}
 
@@ -7,5 +6,8 @@ public interface Competitor {
 	}
 
 	public boolean hasValidname(){
+		return false;
 	}
+
+
 }
