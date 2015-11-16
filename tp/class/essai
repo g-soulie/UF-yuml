@@ -1,0 +1,19 @@
+Personn
+
++ MAX_PERSON_AGE : int
++ MAX_HEIGHT : float
++ MIN_HEIGHT : float
++ MAX_WEIGHT : float
++ MIN_WEIGHT : float
+- firstName : String
+- lastName : String
+- birthDay : Calendar
+- height : float
+- weight : float
+
++ Person(String,String,Calendar,float,float)
++ Person(String,String)
++ getBMI() : float
++ getCorpulence() : Corpulence
++ getAdvice() : String
+- initialMsg() : String

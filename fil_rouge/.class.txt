@@ -1,8 +1,8 @@
 authentificate
-Bet
-BetOnPodium
-BetOnWinner
+Betting
 Betting_interface
+BettingOnPodium
+BettingOnWinner
 Competition
 Competitor
 CurrentLists

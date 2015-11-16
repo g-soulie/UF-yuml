@@ -1,1 +1,1 @@
-echo "[Classe name2|+ Attribut1: c;- Attribut2: d]"| ./yuml -s plain -f svg -o exemple/uml.svg -v
+echo "['equivalence' cost - success rate|attributs]"| ./yuml -s plain -f png -o exemple/uml.png -v
