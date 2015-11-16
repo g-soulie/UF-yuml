@@ -12,9 +12,7 @@ CurrentLists,->*,Competition
 CurrentLists,->*,Subscriber
 CurrentLists,->*,Team
 CurrentLists,->*,SingleCompetitor
-Team,<>*-1..*,SingleCompetitor
+Team,<>*-2..*,SingleCompetitor
 Gestion,->1,CurrentLists
 Gestion,-.-^,<<Interface>> Betting
 Gestion,->1,authentificate
-Subscriber,->*,BetOnPodium
-Subscriber,->*,BetOnWinner
