@@ -1,7 +1,0 @@
-class
--f.class.txt
-java
-liaisons.txt
-string_yuml.txt
-uml.pdf
-uml.png

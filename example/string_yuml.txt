@@ -1,1 +1,0 @@
-echo "[name classe 1|+ attibut 1 : int;+ hrkgjmrl|+ method1 : void],[name classe 2|+ attibut 1 : int;+ hrkgjmrl|+ method1 : void],[name classe 1]-.-^[name classe 2]"| ./yuml -s scruffy -f png -o example/uml.png -v

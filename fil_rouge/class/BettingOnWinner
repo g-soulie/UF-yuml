@@ -1,6 +1,0 @@
-BettingOnWinner
-
-- winner: Competitor
-
-+ BettingOnWinner(Competitor winner): void
-+ prediction(Competitor winner): boolean
