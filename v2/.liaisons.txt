@@ -1,5 +1,0 @@
-class
-liaisons.txt
-string_yuml.txt
-uml.png
-uml (sans methodes).png
