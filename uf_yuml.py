@@ -73,6 +73,7 @@ def get_liaisons(folder):
     for fichier in fichiers:
         if fichier[0:7]=="liaison":
             liaisons.append(fichier)
+    commands.getoutput("rm ./"+folder+".liaisons.txt")
     return liaisons
 
 
@@ -134,7 +135,7 @@ def ecriture_classe():#ecris les classes de la stringyuml
         jsons.append(fichier_to_JSON(i,classes))
     if (params["-j"]=="True"):
         javagen.gen(folder,jsons,"True"==params["-g"])
-
+    commands.getoutput("rm ./"+folder+".class.txt")
     return string_yuml
 
 

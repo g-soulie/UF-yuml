@@ -59,20 +59,21 @@ def write(javaObject,folder):
 
 
 def gen(folder,jsons,getter):
-	commands.getoutput("rm ./"+folder+"/java/*")
+    commands.getoutput("mkdir ./"+folder+"/java/")
+    commands.getoutput("rm ./"+folder+"/java/*")
 
 	#Création des classes et des interfaces:
-	for json in jsons:
-		if json["name"][0] == "<":
-			createInterface(json)
-		else:
-			createClasse(json)
+    for json in jsons:
+        if json["name"][0] == "<":
+            createInterface(json)
+        else:
+            createClasse(json)
 
-	#Générations des liaisons:
-	setupLiaisons(folder)
+	#Générations des liaisons
+    setupLiaisons(folder)
 
 	#Ecriture des fichiers générés
-	for classe in classes:
-		write(classes[classe],folder)
-	for interface in interfaces:
-		write(interfaces[interface],folder)
+    for classe in classes:
+        write(classes[classe],folder)
+    for interface in interfaces:
+        write(interfaces[interface],folder)
