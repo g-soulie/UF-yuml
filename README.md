@@ -37,4 +37,4 @@ The typical run command is :
 
 <b> Acknowledgement </b>
 
-99.9% of the work is from the yuml repository on github : https://github.com/wandernauta/yuml/
+99.9% of the work is from the yuml API
