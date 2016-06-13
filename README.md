@@ -1,4 +1,4 @@
-# UF-yuml
+# UF-yUML
 
 
 
@@ -14,7 +14,9 @@ This project is based on yuml 0.1 (https://pypi.python.org/pypi/yuml). In order 
 
       sudo pip install https://github.com/wandernauta/yuml/zipball/master
 
-Once you've install yuml 0.1, you only need to clone the UF-yUML repository in the same folder.
+Once you've install yuml 0.1, you only need to clone the UF-yUML repository in the same folder:
+
+      git clone https://github.com/g-soulie/uf-yuml/
 
 
 <b>Utilisation</b>
