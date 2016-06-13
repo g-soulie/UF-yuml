@@ -1,7 +1,0 @@
-SingleCompetitor
-
-- lastName: String
-- firstName: String
-- borndate: String
-
-+ SingleCompetitor(String lastName, String firstName, String borndate): void

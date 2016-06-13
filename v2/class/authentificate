@@ -1,6 +1,0 @@
-Authentificate
-
-  
-
-+ authentificateSubscriber(String username, String password)
-+ authentificateManager(String password)

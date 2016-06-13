@@ -1,23 +1,6 @@
 # UF-yuml
 
 
-LIEN GOOGLE DOC Groupe 1 FIL ROUGE :
---------------------------------------------------------------------------------
-
-https://drive.google.com/folderview?id=0B61X2ZrP8eDSMkZSYnVsZnVqX0k&usp=sharing
-----------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------
-
-SVN repository Groupe 1 fil rouge :
---------------------------------------------------------------------------------
-https://redmine-df.telecom-bretagne.eu/svn/filrouge_g1
-----------------------------------------------------------------------------------------
-https://redmine-df.telecom-bretagne.eu/projects/filrouge_g1
-----------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------
-
-
-
 
 Welcome in the User Friendly Yuml repository.
 
@@ -45,4 +28,4 @@ The typical run command is :
 
 <b> Acknowledgement </b>
 
-99.9% of the work is from the yuml API
+Thanks yuml API for their amazing work !
